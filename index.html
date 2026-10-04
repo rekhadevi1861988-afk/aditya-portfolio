@@ -1,0 +1,578 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aditya | Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #f5f7ff;
+            --card: #ffffff;
+            --text: #172033;
+            --muted: #667085;
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --border: #e5e7eb;
+        }
+
+        body.dark {
+            --bg: #0b1020;
+            --card: #151b2e;
+            --text: #f5f7ff;
+            --muted: #aab2c5;
+            --border: #283149;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: 0.4s;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        body.dark nav {
+            background: rgba(11,16,32,0.8);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        #themeBtn {
+            border: none;
+            background: var(--primary);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 19px;
+            transition: 0.3s;
+        }
+
+        #themeBtn:hover {
+            transform: rotate(25deg) scale(1.1);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            padding: 70px 8%;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            animation: slideIn 1s ease;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(42px, 7vw, 75px);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .gradient {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 19px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            color: white;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            box-shadow: 0 8px 25px rgba(99,102,241,0.3);
+        }
+
+        .secondary-btn {
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* PHOTO */
+
+        .photo-box {
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .photo-box img {
+            width: 310px;
+            height: 310px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid var(--primary);
+            padding: 6px;
+            background: var(--card);
+            box-shadow: 0 0 50px rgba(99,102,241,0.35);
+        }
+
+        /* SECTIONS */
+
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        /* ABOUT */
+
+        .about-card {
+            background: var(--card);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        /* SKILLS */
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .skill {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 25px;
+            text-align: center;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(99,102,241,0.15);
+        }
+
+        .skill span {
+            font-size: 35px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* PROJECTS */
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .project {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .project h3 {
+            margin-bottom: 12px;
+        }
+
+        .project p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* CONTACT */
+
+        .contact {
+            text-align: center;
+            background: var(--card);
+            border-radius: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .contact p {
+            color: var(--muted);
+            margin: 15px 0 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        /* ANIMATIONS */
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 750px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 50px;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .photo-box img {
+                width: 230px;
+                height: 230px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <div class="logo">Aditya.</div>
+
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <button id="themeBtn">🌙</button>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="hero-text">
+
+            <h1>
+                Hi, I'm <span class="gradient">Aditya</span> 👋
+            </h1>
+
+            <p>
+                Class 11 student learning coding, web development
+                and technology. I love creating useful and creative
+                digital projects.
+            </p>
+
+            <div class="buttons">
+                <a href="#projects" class="btn primary-btn">
+                    View My Projects 🚀
+                </a>
+
+                <a href="#contact" class="btn secondary-btn">
+                    Contact Me
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- CHANGE THIS IMAGE -->
+
+        <div class="photo-box">
+
+            <img
+                src="aditya2010"
+                alt="Aditya's Photo"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="section-title">
+            <h2>About Me</h2>
+            <p>A little bit about myself</p>
+        </div>
+
+        <div class="about-card">
+
+            <p>
+                Hello! My name is Aditya. I am a Class 11 student
+                interested in technology, coding and learning new
+                skills. I am currently exploring HTML, CSS and
+                JavaScript and building my first websites.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+
+    <section id="skills">
+
+        <div class="section-title">
+            <h2>My Skills</h2>
+            <p>Things I am learning</p>
+        </div>
+
+        <div class="skills">
+
+            <div class="skill">
+                <span>🌐</span>
+                <h3>HTML</h3>
+            </div>
+
+            <div class="skill">
+                <span>🎨</span>
+                <h3>CSS</h3>
+            </div>
+
+            <div class="skill">
+                <span>⚡</span>
+                <h3>JavaScript</h3>
+            </div>
+
+            <div class="skill">
+                <span>🎬</span>
+                <h3>Video Editing</h3>
+            </div>
+
+            <div class="skill">
+                <span>🎨</span>
+                <h3>Canva</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+        <div class="section-title">
+            <h2>My Projects</h2>
+            <p>Some things I have created</p>
+        </div>
+
+        <div class="projects">
+
+            <div class="project">
+                <h3>🌐 Personal Website</h3>
+                <p>
+                    My first professional portfolio website
+                    created using HTML and CSS.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>🧮 Calculator</h3>
+                <p>
+                    A simple calculator project created
+                    using JavaScript.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>📚 Study Planner</h3>
+                <p>
+                    A simple website to organize study
+                    schedules and daily tasks.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+        <div class="contact">
+
+            <div class="section-title">
+                <h2>Let's Connect 🤝</h2>
+
+                <p>
+                    Want to discuss a project or learn together?
+                </p>
+
+                <a
+                    href="mailto:your-email@example.com"
+                    class="btn primary-btn"
+                >
+                    Send Me an Email
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Aditya. Built with HTML, CSS & JavaScript.
+        </p>
+
+    </footer>
+
+
+    <!-- DARK MODE JAVASCRIPT -->
+
+    <script>
+
+        const themeBtn = document.getElementById("themeBtn");
+
+        themeBtn.addEventListener("click", function () {
+
+            document.body.classList.toggle("dark");
+
+            if (document.body.classList.contains("dark")) {
+
+                themeBtn.textContent = "☀️";
+
+            } else {
+
+                themeBtn.textContent = "🌙";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+```
